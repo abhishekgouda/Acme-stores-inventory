@@ -1,0 +1,127 @@
+<div class="container" style="font-size:70px;color:green;">Acme Stores </div>
+<div class="container billing">
+
+    <br/>
+<form class="form-inline" role="form">
+    &nbsp; &nbsp; &nbsp; &nbsp;
+    <div class="form-group">
+       <input type="text" ng-change="addProduct(1);" ng-model="products.product1.id" class="form-control"  placeholder=" Enter product id">
+    </div>
+    &nbsp; &nbsp; &nbsp; &nbsp;    
+    <div class="form-group">
+     <input type="text" ng-model="products.product1.name" class="form-control"  placeholder=" Product name">
+    </div>
+    &nbsp; &nbsp; &nbsp; &nbsp;    
+    <div class="form-group">
+      <input type="number"  ng-change="addMore(products.product1,1)" ng-model="products.product1.units" class="form-control" placeholder=" No of units">
+    </div>
+    &nbsp; &nbsp; &nbsp; &nbsp;       
+    <div class="form-group">
+       <input type="text"  ng-model="products.product1.unitprice" class="form-control" placeholder=" Per Unit price">
+    </div>
+     &nbsp; &nbsp; &nbsp; &nbsp; 
+    <div class="form-group">
+       <input type="text" ng-model="products.product1.price" class="form-control" placeholder=" Total price">
+    </div>
+    <br/>    <br/>
+       
+    
+    &nbsp; &nbsp; &nbsp; &nbsp;
+    <div class="form-group">
+       <input type="text" ng-change="addProduct(2)" ng-model="products.product2.id" class="form-control"  placeholder=" Enter product id">
+    </div>
+    &nbsp; &nbsp; &nbsp; &nbsp;    
+    <div class="form-group">
+     <input type="text" ng-model="products.product2.name" class="form-control"  placeholder=" Product name">
+    </div>
+    &nbsp; &nbsp; &nbsp; &nbsp;    
+    <div class="form-group">
+      <input type="text"  ng-change="addMore(products.product2,2)" ng-model="products.product2.units" class="form-control" placeholder=" No of units">
+    </div>
+    &nbsp; &nbsp; &nbsp; &nbsp;       
+    <div class="form-group">
+       <input type="text" ng-model="products.product2.unitprice" class="form-control" placeholder=" Per Unit price">
+    </div>
+     &nbsp; &nbsp; &nbsp; &nbsp; 
+    <div class="form-group">
+       <input type="text" ng-model="products.product2.price" class="form-control" placeholder=" Total price">
+    </div>
+    <br/>    <br/>
+    
+    
+    
+     &nbsp; &nbsp; &nbsp; &nbsp;
+    <div class="form-group">
+       <input type="text" ng-change="addProduct(3)" ng-model="products.product3.id" class="form-control"  placeholder=" Enter product id">
+    </div>
+    &nbsp; &nbsp; &nbsp; &nbsp;    
+    <div class="form-group">
+     <input type="text" ng-model="products.product3.name" class="form-control"  placeholder=" Product name">
+    </div>
+    &nbsp; &nbsp; &nbsp; &nbsp;    
+    <div class="form-group">
+      <input type="text"  ng-change="addMore(products.product3,3)" ng-model="products.product3.units" class="form-control" placeholder=" No of units">
+    </div>
+    &nbsp; &nbsp; &nbsp; &nbsp;       
+    <div class="form-group">
+       <input type="text" ng-model="products.product3.unitprice" class="form-control" placeholder=" Per Unit price">
+    </div>
+     &nbsp; &nbsp; &nbsp; &nbsp; 
+    <div class="form-group">
+       <input type="text" ng-model="products.product3.price" class="form-control" placeholder=" Total price">
+    </div>
+    <br/>    <br/>
+       
+    
+     &nbsp; &nbsp; &nbsp; &nbsp;
+    <div class="form-group">
+       <input type="text" ng-change="addProduct(4)" ng-model="products.product4.id" class="form-control"  placeholder=" Enter product id">
+    </div>
+    &nbsp; &nbsp; &nbsp; &nbsp;    
+    <div class="form-group">
+     <input type="text" ng-model="products.product4.name" class="form-control"  placeholder=" Product name">
+    </div>
+    &nbsp; &nbsp; &nbsp; &nbsp;    
+    <div class="form-group">
+      <input type="text" ng-model="products.product4.units" class="form-control" placeholder=" No of units">
+    </div>
+    &nbsp; &nbsp; &nbsp; &nbsp;       
+    <div class="form-group">
+       <input type="text"  ng-change="addMore(products.product4,4)" ng-model="products.product4.unitprice" class="form-control" placeholder=" Per Unit price">
+    </div>
+     &nbsp; &nbsp; &nbsp; &nbsp; 
+    <div class="form-group">
+       <input type="text" ng-model="products.product4.price" class="form-control" placeholder=" Total price">
+    </div>
+    <br/>    <br/>
+    
+     &nbsp; &nbsp; &nbsp; &nbsp;
+    <div class="form-group">
+       <input type="text" ng-change="addProduct(5)" ng-model="products.product5.id" class="form-control"  placeholder=" Enter product id">
+    </div>
+    &nbsp; &nbsp; &nbsp; &nbsp;    
+    <div class="form-group">
+     <input type="text" ng-model="products.product5.name" class="form-control"  placeholder=" Product name">
+    </div>
+    &nbsp; &nbsp; &nbsp; &nbsp;    
+    <div class="form-group">
+      <input type="text"  ng-change="addMore(products.product5,5)" ng-model="products.product5.units" class="form-control" placeholder=" No of units">
+    </div>
+    &nbsp; &nbsp; &nbsp; &nbsp;       
+    <div class="form-group">
+       <input type="text" ng-model="products.product5.unitprice" class="form-control" placeholder=" Per Unit price">
+    </div>
+    &nbsp; &nbsp; &nbsp; &nbsp;
+    <div class="form-group">
+       <input type="text" ng-model="products.product5.price" class="form-control" placeholder=" Total price">
+    </div>
+    <br/>    <br/>
+         &nbsp; &nbsp; &nbsp; &nbsp;
+    <button type="button" ng-click="summary(products)" class="btn btn-default">Submit</button><br/><br/><br/>
+    <span ng-show="empty" style="color:red;font-size:19px;">Please select at least one product</span>
+    
+    </form>
+    <br/>
+
+   
+</div>
