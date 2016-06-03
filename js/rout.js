@@ -5,55 +5,16 @@ app.config(function($routeProvider){
                         controller:'storecontroller'
                         }).when('/billing',{
                         templateUrl:'Views/billing.html',
-                        controller:'storecontroller'
+                        controller:'Billingcontroller'
                         }).when('/summary',{
                         templateUrl:'Views/summary.html',
-                          controller:'storecontroller'
-                       
+                        controller:'SummaryController'
     }).otherwise({redirectTo:'/login'});
             
 });
-app.controller('storecontroller',function($scope,$http,$location,$routeParams){
+app.controller('storecontroller',function($scope,$http,$location,$rootScope){
   
-    $scope.final=$routeParams.final;
-    console.log($scope.final);
-    $scope.Billdate = $routeParams.Billdate;
     
-
-  $scope.addMore = function(details,n) {
-      
-      if (n==1) {
-          
-          details.price1=$scope.perunit1*details.units;
-          
-          details.price = details.price1 + "Rupees"
-      } else if(n==2){
-          
-          details.price2=$scope.perunit2*details.units;
-          
-          details.price = details.price2 + "Rupees"
-          
-      }else if(n==3){
-       details.price3=$scope.perunit3*details.units;
-       
-          details.price = details.price3 + "Rupees"   
-          
-          
-      }else if(n==4){
-          details.price4=$scope.perunit4*details.units;
-       
-          details.price = details.price4 + "Rupees"
-          
-          
-      }else if(n==5){
-          
-          details.price1=$scope.perunit5*details.units;
-          
-          details.price = details.price5 + "Rupees"
-          
-      }
-        } 
-  
     $scope.submit = function() {
         
      if($scope.loginform.$valid) {
@@ -65,7 +26,8 @@ app.controller('storecontroller',function($scope,$http,$location,$routeParams){
           for(i=0; i < $scope.authorized.length; i++){
                  
                 if(($scope.user.name == $scope.authorized[i].name)&& ($scope.user.name == $scope.authorized[i].name)) {
-                $location.url('/billing').search({"authorizedname":$scope.user.name}); 
+                    $rootScope.User  = $scope.user.name
+                $location.path('/billing'); 
                     break;
             
                 }
@@ -80,129 +42,90 @@ app.controller('storecontroller',function($scope,$http,$location,$routeParams){
      }
         
     }
-     $http.get('js/inventory.json').success(function(data){
-     
-     $scope.inventoryProducts = data;
-     });
+});
+app.controller('Billingcontroller',function($scope,$http,$location,$rootScope){
+        $scope.CartProduct=[];
+ $http.get('js/inventory.json').success(function(data){
+  
 
-    $scope.addProduct = function(n) {
+     $scope.AllProducts = data;
+     $scope.Add=function(product) {
+      
+      if($scope.product== undefined || $scope.product.ProductId==null || ( $scope.product.ProductId > 25) || ($scope.product.ProductId < 1 ) ) {
+         $scope.empty = true;     
+        if ( ( $scope.product.ProductId > 25) || ($scope.product.ProductId < 1 )){
+            $scope.empty = false;  
+          $scope.inValid = true;
+       }
+       } else {
         
-        if(n==1) {
-            for(i=0; i < $scope.inventoryProducts.length;i++) {
-              
-                if($scope.products.product1.id == $scope.inventoryProducts[i].ProductId) {
-                    $scope.products.product1.name = $scope.inventoryProducts[i].ProductName;
-                     $scope.products.product1.units = 1 ;
-                     $scope.products.product1.unitprice = $scope.inventoryProducts[i].Price + " Per Unit";
-                         $scope.products.product1.price = $scope.inventoryProducts[i].Price + " Rupees";
-                                        
-                    $scope.perunit1  =  parseInt($scope.inventoryProducts[i].Price);
- 
-                }
-            }
-        
-            
-        
-        }
-        
-        if(n==2) {
-            for(i=0; i < $scope.inventoryProducts.length;i++) {
-              
-                if($scope.products.product2.id == $scope.inventoryProducts[i].ProductId) {
-                    $scope.products.product2.name = $scope.inventoryProducts[i].ProductName;
-                     $scope.products.product2.units = 1 ;
-                     $scope.products.product2.unitprice = $scope.inventoryProducts[i].Price + " Per Unit";
-                         $scope.products.product2.price = $scope.inventoryProducts[i].Price + " Rupees";
-                            $scope.perunit2  =  parseInt($scope.inventoryProducts[i].Price);              
-                
-                    
-                }
-            }
-        
-            
-        
-        }
-             if(n==3) {
-               
-            for(i=0; i < $scope.inventoryProducts.length;i++) {
-              
-                if($scope.products.product3.id == $scope.inventoryProducts[i].ProductId) {
-                    $scope.products.product3.name = $scope.inventoryProducts[i].ProductName;
-                     $scope.products.product3.units = 1 ;
-                     $scope.products.product3.unitprice = $scope.inventoryProducts[i].Price + " Per Unit";
-                         $scope.products.product3.price = $scope.inventoryProducts[i].Price + " Rupees";
-                                        
-                       $scope.perunit3  =  parseInt($scope.inventoryProducts[i].Price);  
-                    
-                }
-            }
-        
-            
-        
-        }
-          if(n==4) {
-              
-            for(i=0; i < $scope.inventoryProducts.length;i++) {
-                   
-                if($scope.products.product4.id == $scope.inventoryProducts[i].ProductId) {
-                    $scope.products.product4.name = $scope.inventoryProducts[i].ProductName;
-                     $scope.products.product4.units = 1 ;
-                     $scope.products.product4.unitprice = $scope.inventoryProducts[i].Price + " Per Unit";
-                         $scope.products.product4.price = $scope.inventoryProducts[i].Price + " Rupees";
-                                        
-                       $scope.perunit4  =  parseInt($scope.inventoryProducts[i].Price);  
-                    
-                }
-            }
-        
-            
-        
-        }
-                 if(n==5) {
+         
+            $scope.empty = false;  
+          $scope.inValid = false;
+                 
+          $scope.product  =  $scope.AllProducts[(product.ProductId)-1];
            
-            for(i=0; i < $scope.inventoryProducts.length;i++) {
-              
-                if($scope.products.product5.id == $scope.inventoryProducts[i].ProductId) {
-                    $scope.products.product5.name = $scope.inventoryProducts[i].ProductName;
-                     $scope.products.product5.units = 1 ;
-                     $scope.products.product5.unitprice = $scope.inventoryProducts[i].Price ;
-                         $scope.products.product5.price = $scope.inventoryProducts[i].Price + " Rupees";
-                                        
-                       $scope.perunit5  =  parseInt($scope.inventoryProducts[i].Price);  
-                    
-                }
-            }
+          
+           $scope.product.Units = 1;
         
+              $scope.product.TotalPrice = $scope.product.Price;
             
-        
-        }
-      
-        
+       }
+          
     }
-
-$scope.summary = function(bill) {
-
-    if(bill==undefined){
-         $scope.empty=true;  
-      
-    } else {
+     $scope.AddMore = function(currentProduct) {
        
-                            
-  alert(JSON.stringify(bill));
-        
-            
-            
-                        
-  alert(JSON.stringify($scope.final));
-        
-          $scope.Billdate = new Date().toLocaleString();
-     $location.url('/summary').search({"final":$scope.final,"Billdate":$scope.Billdate});
+         $scope.product.TotalPrice = (currentProduct.Units)*(currentProduct.Price);
        
+     }
+     $scope.Finalize  =function() {
+         
+         if($scope.CartProduct.length<5) {
+             var flag=true;
+        
+             if($scope.CartProduct.length!=0){
+                 for(i=0;i<$scope.CartProduct.length;i++){
+                  if($scope.CartProduct[i].ProductId == $scope.product.ProductId)  {
+                     flag = false;  
+                   $scope.CartProduct[i].Units+=$scope.product.Units;
+                      $scope.CartProduct[i].TotalPrice =  $scope.CartProduct[i].Units *$scope.CartProduct[i].Price;
+                       $rootScope.kart = $scope.CartProduct;
+                      
+                      }  
+                 }
+             }
      
-             
+          if(flag){
               
-                }
+           $scope.CartProduct.push( angular.copy($scope.product));
+              $rootScope.kart = $scope.CartProduct;
+          }
+         
+         } else {
+            alert("cart is full so redirecting to summary");
+             $location.path('/summary');
+         }
+         
+         $scope.product = "";
+         
+         
+     }
+     
+     $scope.Goto = function($scope) {
+         
+          $location.path('/summary');
+     }
+     
+ });
+   
+      
     
-}
-        
+    
+});
+app.controller('SummaryController',function($scope,$http,$location,$rootScope){
+    
+    $scope.checkoutTime  = new Date();
+
+    
+    
 });
