@@ -1,0 +1,30 @@
+<div class="container">
+<p>The deatils of the bills are</p>
+<br/>
+    
+  
+    <p style="color:red">The Checkout Date and Time : {{checkoutTime | date:'medium'}}</p>
+    <p style="color:#47783E">cashier name:{{User}}</p>
+    
+    
+    
+   
+<table style="border:1px solid green">
+    <tr>
+        <th>ProductName</th>
+        <th>Quantity</th>
+        <th>Price/Item</th>
+        <th>TotalPrice</th>
+    </tr>
+     <tr ng-repeat="item in kart">
+        <td>{{item.ProductName}}</td>
+        <td>{{item.Units}}</td>
+          <td>{{item.Price}}</td>
+          <td>{{item.TotalPrice}}</td>
+         
+    </tr>
+    
+</table>
+    
+    <p>your total bill is {{total}}</p>
+</div>
