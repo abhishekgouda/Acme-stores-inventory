@@ -78,17 +78,24 @@ app.controller('Billingcontroller',function($scope,$http,$location,$rootScope){
          $scope.product.TotalPrice = (currentProduct.Units)*(currentProduct.Price);
        
      }
+         $scope.totalAmount = new Number();
      $scope.Finalize  =function() {
-         
+      
          if($scope.CartProduct.length<5) {
              var flag=true;
-        
+       
              if($scope.CartProduct.length!=0){
                  for(i=0;i<$scope.CartProduct.length;i++){
                   if($scope.CartProduct[i].ProductId == $scope.product.ProductId)  {
                      flag = false;  
                    $scope.CartProduct[i].Units+=$scope.product.Units;
+                       $scope.totalAmount -=  $scope.CartProduct[i].TotalPrice;
                       $scope.CartProduct[i].TotalPrice =  $scope.CartProduct[i].Units *$scope.CartProduct[i].Price;
+                      
+                      
+                      
+                      $scope.totalAmount +=  Number($scope.CartProduct[i].TotalPrice);  
+                      $rootScope.finalAmount =  $scope.totalAmount;
                        $rootScope.kart = $scope.CartProduct;
                       
                       }  
@@ -96,7 +103,8 @@ app.controller('Billingcontroller',function($scope,$http,$location,$rootScope){
              }
      
           if(flag){
-              
+                 $scope.totalAmount +=  Number($scope.product.TotalPrice); 
+                   $rootScope.finalAmount =  $scope.totalAmount
            $scope.CartProduct.push( angular.copy($scope.product));
               $rootScope.kart = $scope.CartProduct;
           }
